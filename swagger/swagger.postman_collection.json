@@ -1,0 +1,127 @@
+{
+	"id": "99667769-7050-43d7-ad91-5e34cabcfe19",
+	"name": "swagger",
+	"description": "",
+	"auth": null,
+	"events": null,
+	"variables": [],
+	"order": [
+		"62264482-d1e7-41ac-ac96-fa74c869fd9f",
+		"91fb016e-a43b-49a4-84ed-37d5ecfb23bc",
+		"9728c3b0-a167-4ff5-b349-471f409d55f1"
+	],
+	"folders_order": [],
+	"protocolProfileBehavior": {},
+	"folders": [],
+	"requests": [
+		{
+			"id": "62264482-d1e7-41ac-ac96-fa74c869fd9f",
+			"name": "/v1/user",
+			"url": "http://localhost:8081/v1/user",
+			"description": "",
+			"data": [],
+			"dataOptions": null,
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"rawModeData": "{\n    \"first_name\": \"Jefferson\",\n    \"last_name\": \"Otoni\",\n    \"birthday\": \"1945-08-20\",\n    \"cpf\": \"039.876.696-75\",\n    \"email\": \"jeff.otoni@gmail.com\",\n    \"password\": \"123456\"\n}",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "91fb016e-a43b-49a4-84ed-37d5ecfb23bc",
+			"name": "/v1/user/:id",
+			"url": "http://localhost:8081/v1/user/:id",
+			"description": "",
+			"data": [],
+			"dataOptions": null,
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"method": "PUT",
+			"pathVariableData": [
+				{
+					"key": "id",
+					"value": "ID_USER"
+				}
+			],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"rawModeData": "{\n    \"first_name\": \"Jefferson\",\n    \"last_name\": \"Otoni\",\n    \"birthday\": \"1945-08-20\",\n    \"cpf\": \"039.876.696-75\",\n    \"email\": \"jeff.otoni@gmail.com\",\n    \"password\": \"123456\"\n}",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {
+				"id": "ID_USER"
+			}
+		},
+		{
+			"id": "9728c3b0-a167-4ff5-b349-471f409d55f1",
+			"name": "/v1/user",
+			"url": "http://localhost:8081/v1/user?nome=jeff&email=jeff@&cpf=03.987.748-05",
+			"description": "",
+			"data": null,
+			"dataOptions": null,
+			"dataMode": null,
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "nome",
+					"value": "jeff",
+					"equals": true,
+					"description": "[jeff, gui, joy]",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "jeff@",
+					"equals": true,
+					"description": "[jeff@, gui@, joy@]",
+					"enabled": true
+				},
+				{
+					"key": "cpf",
+					"value": "03.987.748-05",
+					"equals": true,
+					"description": "[03.987.748-05]",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		}
+	]
+}

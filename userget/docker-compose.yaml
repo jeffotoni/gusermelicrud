@@ -1,0 +1,56 @@
+version: '3.5'
+
+services:
+  userget:
+    build:
+      context: ../userget
+      dockerfile: Dockerfile
+    container_name: userget
+    hostname: userget
+    domainname: userget.local.com
+    environment:
+      - "TZ=America/Sao_Paulo"
+      - "API_ENV=prod"
+      - "MONGODB_USERNAME=root"
+      - "MONGODB_PASSWORD=123456"
+      - "MONGODB_URI=mongodb.local.com:27017"
+      - "MONGODB_OPTIONS=authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=false"
+      - "REDIS_ADDR=redis.local.com:6379"
+      - "REDIS_PASSWORD="
+    networks:
+        gmeli:
+           aliases:
+              - userget.local.com
+    ports:
+      - 8082:8082
+    depends_on:
+      - mongo-users
+      - redis
+    restart: always
+
+  redis:
+    image: 'bitnami/redis:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    networks:
+      gmeli:
+            aliases:
+              - redis.local.com
+    
+  mongo-users:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 123456
+      MONGO_INITDB_DATABASE: meliusers
+      MONGO_DATA_DIR: /data/db
+      MONGO_LOG_DIR: /dev/null
+    ports:
+      - "27017:27017"
+    networks:
+        gmeli:
+            aliases:
+              - mongodb.local.com
+networks:
+  gmeli:
+      driver: bridge

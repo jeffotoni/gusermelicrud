@@ -1,0 +1,54 @@
+version: '3.5'
+
+services:
+  userwrite:
+    build:
+      context: ../userwrite
+      dockerfile: Dockerfile
+    container_name: userwrite
+    hostname: userwrite
+    domainname: userwrite.local.com
+    environment:
+      - "TZ=America/Sao_Paulo"
+      - "API_ENV=prod"
+      - "MONGODB_USERNAME=root"
+      - "MONGODB_PASSWORD=123456"
+      - "MONGODB_URI=mongodb.local.com:27017"
+      - "MONGODB_OPTIONS=authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=false"
+    networks:
+        gmeli:
+           aliases:
+              - userwrite.local.com
+    ports:
+      - 8081:8081
+    depends_on:
+      - mongo-users
+    restart: always
+    
+  mongo-users:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 123456
+      MONGO_INITDB_DATABASE: meliusers
+      MONGO_DATA_DIR: /data/db
+      MONGO_LOG_DIR: /dev/null
+    ports:
+      - "27017:27017"
+    networks:
+        gmeli:
+            aliases:
+              - mongodb.local.com
+  # proxy:
+  #   image: nginx
+  #   volumes:
+  #    - ./nginx.conf:/etc/nginx/nginx.conf:ro
+  #   ports:
+  #    - "8080:80"
+  #   environment:
+  #    - NGINX_HOST=localhost
+  #    - NGINX_PORT=8080
+
+networks:
+  gmeli:
+      driver: bridge
